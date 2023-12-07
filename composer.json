@@ -1,0 +1,17 @@
+{
+    "name": "migue/bienes-raices",
+    "description": "Creando un proyecto php con POO",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mario Miguel Méndez Rodríguez",
+            "email": "miguel.rguez9899@gmail.com"
+        }
+    ],
+    "require": {}
+}

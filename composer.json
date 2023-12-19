@@ -13,5 +13,7 @@
             "email": "miguel.rguez9899@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "intervention/image": "^2.7"
+    }
 }

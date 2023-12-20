@@ -23,13 +23,14 @@ $errores = Propiedad::getErrores();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //crear una nueva instancia
-    $propiedad = new Propiedad($_POST);
+    $propiedad = new Propiedad($_POST['propiedad']);
 
     $imagePath =md5(uniqid(rand(), true)).".jpg";
     //setear la image
     //Realiza un resize a la imagen con intervetion
-    if ($_FILES['image']['tmp_name']) {
-        $image = Image::make($_FILES['image']['tmp_name'])->fit(800, 600);
+    
+    if ($_FILES['propiedad']['tmp_name']['image']) {
+        $image = Image::make($_FILES['propiedad']['tmp_name']['image'])->fit(800, 600);
         $propiedad->setImage($imagePath);
     }
 

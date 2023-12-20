@@ -8,14 +8,8 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 estaAutenticado();
 
-$db = conectarDb();
-
-
 $propiedad=new Propiedad();
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
 
-// Validar 
 
 $errores = Propiedad::getErrores();
 

@@ -1,5 +1,6 @@
 <?php
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManagerStatic as Image;
 include '../../includes/app.php';
 estaAutenticado();
@@ -18,8 +19,7 @@ $propiedad=Propiedad::find($id);
 
 
 // obtener vendedores
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
+$vendedores=Vendedor::all();
 
 $errores = Propiedad::getErrores();
 
@@ -39,8 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $propiedad->setImage($imagePath);
     }
     if (empty($errores)) {
+        if ($_FILES['propiedad']['tmp_name']['image']) {
         //almacenar imagen
         $image->save(CARPETA_IMAGENES.$imagePath);
+        }
         // Si hay una imagen NUEVA, entonces borrar la anterior.
         $propiedad->guardar_propiedad();
     }

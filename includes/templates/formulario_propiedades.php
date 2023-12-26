@@ -34,9 +34,17 @@
     value="<?php echo s($propiedad->estacionamiento); ?>">
 
 <legend>Información Vendedor:</legend>
-<label for="nombre_vendedor">Nombre:</label>
+<label for="vendedor">Nombre:</label>
 
-<select name="vendedorId" id="nombre_vendedor">
-    
+<select name="propiedad[vendedorId]" id="vendedor">
+    <option value="" selected>---Seleccione---</option>
+    <?php 
+        foreach($vendedores as $vendedor){?>
+
+            <option <?php echo $propiedad->vendedorId===$vendedor->id ? 'selected': '';?> value="<?php echo $vendedor->id?>"><?php echo s($vendedor->nombre)." ".s($vendedor->apellido)?></option>
+        
+
+
+    <?php } ?>
 </select>
 </fieldset>

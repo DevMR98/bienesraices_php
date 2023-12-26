@@ -2,6 +2,7 @@
 
 require '../../includes/app.php';
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManagerStatic as Image;
 
 // Proteger esta ruta.
@@ -9,6 +10,9 @@ use Intervention\Image\ImageManagerStatic as Image;
 estaAutenticado();
 
 $propiedad=new Propiedad();
+
+//consulta para obtener todos los vendedores
+$vendedores=Vendedor::all();
 
 
 $errores = Propiedad::getErrores();

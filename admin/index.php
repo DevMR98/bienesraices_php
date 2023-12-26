@@ -1,4 +1,5 @@
 <?php
+use App\Vendedor;
 include '../includes/app.php';
 // Proteger esta ruta.
 
@@ -9,6 +10,9 @@ use App\Propiedad;
 
 
 $propiedades=Propiedad::all();
+$vendedores=Vendedor::all();
+
+// debugg($propiedades);
 // Validar la URL 
 $mensaje = $_GET['mensaje'] ?? null;
 

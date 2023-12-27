@@ -1,0 +1,25 @@
+ <?php
+
+ 
+ 
+ 
+ ?>
+
+<fieldset>
+<legend>Información General</legend>
+
+<label for="nombre">Nombre:</label>
+<input name="vendedor[nombre]" type="text" id="nombre" placeholder="Nombre Vendedor(a)" value="<?php echo s($vendedor->nombre); ?>">
+
+
+<label for="apellido">Apellido:</label>
+<input name="vendedor[apellido]" type="text" id="apellido" placeholder="Apellido Vendedor(a)" value="<?php echo s($vendedor->apellido); ?>">
+
+</fieldset>
+
+<fieldset>
+    <legend>Información Extra</legend>
+
+    <label for="telefono">teléfono:</label>
+<input name="vendedor[telefono]" type="text" id="telefono" placeholder="Numero de teléfono" value="<?php echo s($vendedor->telefono); ?>">
+</fieldset>

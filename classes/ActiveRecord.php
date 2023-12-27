@@ -1,5 +1,8 @@
 <?php
+
 namespace App;
+// error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+// ini_set('display_errors', 'Off');
 class ActiveRecord{
 
         //base de datos
@@ -118,7 +121,7 @@ class ActiveRecord{
 
         if ($resultado) {
             $this->borrarImagen();
-            header('location: /bienesraices/admin?resultado=3');
+            header('location: /bienesraices/admin?mensaje=3');
         }
     }
 
@@ -154,6 +157,24 @@ class ActiveRecord{
         }
 
     }
+
+    //obtiene determinado numero de registros
+    public static function get($cantidad)
+    {
+        $query = "SELECT *FROM ".static::$tabla." LIMIT ".$cantidad;
+        $resultado = self::consultar_sql($query);
+
+
+        // Verificar si se encontraron propiedades
+        if (!empty($resultado)) {
+            return $resultado;
+        } else {
+            // Manejar el caso en que no se encuentran propiedades
+            return null; // o puedes devolver un valor predeterminado según tu lógica
+        }
+
+    }
+
 
 
     //buscar un registro por id

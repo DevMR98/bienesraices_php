@@ -25,9 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id=$_POST["id_eliminar"];
 
     if($id){
-        $propiedad=Propiedad::find($id);
-        
-        $propiedad->eliminar();
+        $tipo=$_POST['tipo'];
+        if(validarTipoContenido($tipo)){
+            //compara lo que vamos a eliminar
+            if($tipo==='vendedor'){
+                $vendedor=Vendedor::find($id);
+                $vendedor->eliminar();
+            }else if($tipo==='propiedad'){
+                $propiedad=Propiedad::find($id);
+                $propiedad->eliminar();
+            }
+
+        }
     }
     
 
@@ -40,15 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     <?php
-        if ($mensaje == 1) {
-            echo '<p class="alerta exito">Anuncio Creado Correctamente</p>';
-        } else if ($mensaje == 2) {
-        echo '<p class="alerta exito">Anuncio Actualizado Correctamente</p>';
-        }
-    ?>
+        $m=mostrarNotificacion(intval($mensaje));
+
+        if($m){?>
+            <p class="alerta exito"><?php echo s($m)?></p>
+        <?php } ?>
+    
 
     <a href="/bienesraices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
-
+    <a href="/bienesraices/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
+    <h2>Propiedades</h2>
 
     <table class="propiedades">
         <thead>
@@ -73,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <td>
                 <form method="POST">
                     <input type="hidden" name="id_eliminar" value="<?php echo $propiedad->id; ?>">
+                    <input type="hidden" name="tipo" value="propiedad">
                     <input type="submit" href="/bienesraices/admin/propiedades/borrar.php" class="boton boton-rojo" value="Borrar">
                 </form>
                     
@@ -83,6 +94,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <h2>Vendedores</h2>
+
+
+    <table class="propiedades">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach( $vendedores as $vendedor ): ?>
+            <tr>
+                <td><?php echo $vendedor->id; ?></td>
+                <td><?php echo $vendedor->nombre." ".$vendedor->apellido; ?></td>
+                <td><?php echo $vendedor->telefono; ?></td>
+                <td>
+                <form method="POST">
+                    <input type="hidden" name="id_eliminar" value="<?php echo $vendedor->id; ?>">
+                    <input type="hidden" name="tipo" value="vendedor">
+                    <input type="submit" href="/bienesraices/admin/propiedades/borrar.php" class="boton boton-rojo" value="Borrar">
+                </form>
+                    
+                    <a href="/bienesraices/admin/vendedores/actualizar.php?id=<?php echo $vendedor->id; ?>" class="boton boton-verde">Actualizar</a>
+                </td>
+            </tr>
+
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
 </main>
 
 <?php 
